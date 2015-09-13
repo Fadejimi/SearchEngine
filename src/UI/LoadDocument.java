@@ -10,6 +10,7 @@ package UI;
  *
  * @author Test
  */
+import javax.swing.*;
 public class LoadDocument extends javax.swing.JPanel {
 
     /**
@@ -19,6 +20,41 @@ public class LoadDocument extends javax.swing.JPanel {
         initComponents();
     }
 
+    public JList getDocumentList()
+    {
+        return documentList;
+    }
+    
+    public JList getSentenceList()
+    {
+        return sentenceList;
+    }
+    
+    public JTextField getSearchTextField()
+    {
+        return searchField;
+    }
+    
+    public JList getSearchList()
+    {
+        return searchListBox;
+    }
+    
+    public JButton getSearchButton()
+    {
+        return searchButton;
+    }
+    
+    public JButton getLoadDocumentButton()
+    {
+        return loadButton;
+    }
+    
+    public JButton getSentenceButton()
+    {
+        return sentenceButton;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
