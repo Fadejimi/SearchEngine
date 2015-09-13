@@ -55,6 +55,10 @@ public class LoadDocument extends javax.swing.JPanel {
         return sentenceButton;
     }
     
+    public JButton getExitButton()
+    {
+        return exitButton;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,18 +87,8 @@ public class LoadDocument extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        documentList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(documentList);
 
-        sentenceList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(sentenceList);
 
         loadButton.setText("Load Document");
@@ -152,11 +146,6 @@ public class LoadDocument extends javax.swing.JPanel {
 
         searchButton.setText("Search");
 
-        searchListBox.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(searchListBox);
 
         exitButton.setText("Exit");
@@ -169,12 +158,12 @@ public class LoadDocument extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchField)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(searchButton)
                             .addComponent(exitButton))
-                        .addGap(0, 279, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -210,7 +199,7 @@ public class LoadDocument extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Search Engine", jPanel2);
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        add(jTabbedPane1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
