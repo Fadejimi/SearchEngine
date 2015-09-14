@@ -31,6 +31,11 @@ public class DocumentQuery {
     private PreparedStatement selectAllSentences = null;
     private PreparedStatement selectDocument = null;
     private PreparedStatement selectSentence = null;
+    private PreparedStatement selectDocumentID = null;
+    private PreparedStatement insertTopic = null;
+    private PreparedStatement selectAllTopics = null;
+    private PreparedStatement selectTopicId = null;
+    private PreparedStatement selectTopic = null;
     
     public DocumentQuery()
     {
@@ -47,6 +52,15 @@ public class DocumentQuery {
                     + "documentId = ?");
             selectSentence = con.prepareStatement("SELECT * FROM classified WHERE "
                     + "sentenceId = ?");
+            selectDocumentID = con.prepareStatement("SELECT documentId FROM "
+                    + "document WHERE documentPath = ?");
+            insertTopic = con.prepareStatement("INSERT INTO topic(topic) "
+                    + "VALUES(?)");
+            selectAllTopics = con.prepareStatement("SELECT * FROM topic");
+            selectTopic = con.prepareStatement("SELECT * FROM topic WHERE "
+                    + "topicId = ?");
+            selectTopicId = con.prepareStatement("SELECT topicId FROM topic "
+                    + "WHERE topic = ?");
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -194,5 +208,118 @@ public class DocumentQuery {
         }
         
         return results;
+    }
+    
+    public int getDocumentID(String path) 
+    {
+        ResultSet resultSet = null;
+        int result = 0;
+        try {
+            selectDocumentID.setString(1, path);
+            
+            resultSet = selectDocumentID.executeQuery();
+            
+            while(resultSet.next())
+            {
+                result = resultSet.getInt("documentId");
+            }
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    public int insertTopic(String topic)
+    {
+        int result = 0;
+        
+        try {
+            insertTopic.setString(1, topic);
+            
+            result = insertTopic.executeUpdate();
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return result;
+    }
+    
+    public List<Topic> getAllTopics()
+    {
+        List<Topic> results = null;
+        ResultSet resultSet = null;
+        
+        try {
+            results = new ArrayList<Topic>();
+            
+            resultSet = selectAllTopics.executeQuery();
+            
+            while(resultSet.next())
+            {
+                results.add( new Topic(
+                    resultSet.getInt("topicId"),
+                    resultSet.getString("topic")));
+            }
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return results;
+    }
+    
+    public List<Topic> getTopic(int topicId)
+    {
+        List<Topic> results = null;
+        ResultSet resultSet = null;
+        
+        try {
+            results = new ArrayList<Topic>();
+            
+            selectTopic.setInt(1, topicId);
+            resultSet = selectTopic.executeQuery();
+            
+            while(resultSet.next())
+            {
+                results.add(new Topic(
+                    resultSet.getInt("topicId"),
+                    resultSet.getString("topic")));
+            }
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return results;
+    }
+    
+    public int getTopicId(String topic)
+    {
+        int result = 0;
+        ResultSet resultSet = null;
+        
+        try {
+            selectTopicId.setString(1, topic);
+            
+            resultSet = selectTopicId.executeQuery();
+            
+            while(resultSet.next())
+            {
+                result = resultSet.getInt("topicId");
+            }
+        }
+        catch(SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+        
+        return result;
     }
 }

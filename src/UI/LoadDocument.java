@@ -69,6 +69,10 @@ public class LoadDocument extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        topicTextBox = new javax.swing.JTextField();
+        fileButton = new javax.swing.JButton();
+        topicButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         documentList = new javax.swing.JList();
@@ -86,6 +90,38 @@ public class LoadDocument extends javax.swing.JPanel {
         exitButton = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
+
+        fileButton.setText("Create From File");
+
+        topicButton.setText("Insert Topic");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(topicTextBox)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(fileButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addComponent(topicButton)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(topicTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fileButton)
+                    .addComponent(topicButton))
+                .addContainerGap(201, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Create Topic", jPanel5);
 
         jScrollPane1.setViewportView(documentList);
 
@@ -206,10 +242,12 @@ public class LoadDocument extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList documentList;
     private javax.swing.JButton exitButton;
+    private javax.swing.JButton fileButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -220,5 +258,7 @@ public class LoadDocument extends javax.swing.JPanel {
     private javax.swing.JList searchListBox;
     private javax.swing.JButton sentenceButton;
     private javax.swing.JList sentenceList;
+    private javax.swing.JButton topicButton;
+    private javax.swing.JTextField topicTextBox;
     // End of variables declaration//GEN-END:variables
 }

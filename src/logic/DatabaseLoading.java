@@ -15,7 +15,9 @@ import database.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -59,12 +61,13 @@ public class DatabaseLoading extends JFrame{
         sentenceButton = userInterface.getSentenceButton();
         exitButton = userInterface.getExitButton();
         
+        searchButton.setEnabled(false);
         sentenceButton.addActionListener(
                 new ActionListener()
                 {
                     public void actionPerformed(ActionEvent e)
                     {
-                        //sentenceButtonActionPerformed(e);
+                        sentenceButtonActionPerformed(e);
                     }
                 }
         );
@@ -76,6 +79,7 @@ public class DatabaseLoading extends JFrame{
                     public void actionPerformed(ActionEvent e)
                     {
                         loadButtonActionPerformed(e);
+                        searchButton.setEnabled(true);
                     }
                 }
         );
@@ -120,6 +124,14 @@ public class DatabaseLoading extends JFrame{
             String fileName = file.getName();
             String filePath = file.getAbsolutePath();
             
+            int result = query.insertDocument(filePath);
+            if (result == 1)
+            {
+                System.out.println("Document Inserted");
+            }
+            else {
+                System.out.println("Document not inserted");
+            }
             filesMap.put(fileName, filePath);
         }
         
@@ -136,6 +148,40 @@ public class DatabaseLoading extends JFrame{
             Map.Entry fileEntry = (Map.Entry) iterator.next();
             
             documentModel.addElement(fileEntry.getKey());
+        }
+    }
+    
+    private void sentenceButtonActionPerformed(ActionEvent e)
+    {
+        Set set = filesMap.entrySet();
+        Iterator iterator = set.iterator();
+        
+        while(iterator.hasNext())
+        {
+            Map.Entry fileEntry = (Map.Entry) iterator.next();
+            
+            String filePath = fileEntry.getValue().toString();
+            sentenceModel.addElement(fileEntry.getKey());
+            int lines = 0;
+            
+            try(BufferedReader br = new BufferedReader(new FileReader(fileEntry
+                    .getValue().toString())))
+            {
+                String currentLine = null;
+                
+                while((currentLine = br.readLine()) != null){
+                    lines++;
+                    
+                    if (lines >= 15)
+                    {
+                        System.out.println(currentLine);
+                        
+                        int documentId = query.getDocumentID(filePath);
+                        
+                        
+                    }
+                }
+            }
         }
     }
     
